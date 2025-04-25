@@ -1,0 +1,164 @@
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/interrupt.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define BAUDRATE 115200
+#define VBAUDRATE (F_CPU/((unsigned long) BAUDRATE*16)-1)
+#define BAUDH VBAUDRATE / 256
+#define BAUDL VBAUDRATE % 256
+
+#define LED_BAHAYA   PG5
+#define LED_AMAN     PE5
+#define BUZZER       PE3
+#define SHOWER_PIN   PE4  // Pin kontrol untuk water shower
+
+#define SENSOR_THRESHOLD      400
+#define SHOWER_THRESHOLD      1000
+
+#define SET_BIT(port, bit)     ((port) |= (1 << (bit)))
+#define CLR_BIT(port, bit)     ((port) &= ~(1 << (bit)))
+
+volatile bool gasBahaya = false;
+volatile uint32_t millis_counter = 0;
+bool lastGasState = false;
+bool showerAktif = false;
+
+void UARTInit(void) {
+    UBRR0H = BAUDH;
+    UBRR0L = BAUDL;
+    UCSR0B = (1 << TXEN0);
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+}
+
+void UART_print(const char *str) {
+    while (*str) {
+        while (!(UCSR0A & (1 << UDRE0)));
+        UDR0 = *str++;
+    }
+}
+
+void UART_print_number(uint16_t number) {
+    char buffer[10];
+    itoa(number, buffer, 10);
+    UART_print(buffer);
+}
+
+void timer0_init() {
+    TCCR0A = 0;
+    TCCR0B = (1 << CS01) | (1 << CS00);
+    TIMSK0 = (1 << TOIE0);
+    TCNT0 = 0;
+    sei();
+}
+
+ISR(TIMER0_OVF_vect) {
+    millis_counter++;
+}
+
+void adc_init() {
+    ADMUX = (1 << REFS0) | (1 << MUX2) | (1 << MUX0); // ADC5
+    ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1);
+}
+
+uint16_t adc_read() {
+    ADCSRA |= (1 << ADSC);
+    while (ADCSRA & (1 << ADSC));
+    return ADC;
+}
+
+void setup_io() {
+    DDRG |= (1 << PG5); // red LED
+    DDRE |= (1 << PE5); // green LED
+    DDRE |= (1 << PE3); // buzzer
+    DDRE |= (1 << PE4); // shower output
+
+    adc_init();
+}
+
+void matikan_bahaya() {
+    SET_BIT(PORTE, LED_AMAN);
+    CLR_BIT(PORTG, LED_BAHAYA);
+    gasBahaya = false;
+}
+
+void aktifkan_bahaya() {
+    CLR_BIT(PORTE, LED_AMAN);
+    SET_BIT(PORTG, LED_BAHAYA);
+    gasBahaya = true;
+}
+
+void bunyikan_buzzer() {
+    SET_BIT(PORTE, BUZZER);  // Aktifkan buzzer
+}
+
+void matikan_buzzer() {
+    CLR_BIT(PORTE, BUZZER);  // Matikan buzzer
+}
+
+void aktifkan_shower() {
+    SET_BIT(PORTE, SHOWER_PIN);
+    showerAktif = true;
+}
+
+void matikan_shower() {
+    CLR_BIT(PORTE, SHOWER_PIN);
+    showerAktif = false;
+}
+
+int main(void) {
+    UARTInit();
+    setup_io();
+    timer0_init();
+
+    while (1) {
+        uint16_t sensorValue = adc_read();
+
+        UART_print("Nilai Sensor: ");
+        UART_print_number(sensorValue);
+        UART_print("\r\n");
+
+        if (sensorValue > SENSOR_THRESHOLD) {
+            aktifkan_bahaya();
+            if (!lastGasState) {
+                UART_print("Gas Terdeteksi! Aktifkan FAN\r\n");
+                lastGasState = true;
+            }
+
+            // Aktifkan shower jika sangat tinggi
+            if (sensorValue >= SHOWER_THRESHOLD && !showerAktif) {
+                aktifkan_shower();
+                UART_print("Gas Sangat Tinggi! Aktifkan WATER SHOWER!\r\n");
+            }
+
+            // Matikan shower jika nilai masih berbahaya tapi sudah di bawah 1000
+            else if (sensorValue < SHOWER_THRESHOLD && showerAktif) {
+                matikan_shower();
+                UART_print("Gas Menurun! Matikan WATER SHOWER.\r\n");
+            }
+
+        } else {
+            matikan_bahaya();
+            if (lastGasState) {
+                UART_print("Aman. Matikan FAN\r\n");
+                lastGasState = false;
+            }
+
+            // Pastikan shower mati saat kondisi aman
+            if (showerAktif) {
+                matikan_shower();
+                UART_print("Aman. Matikan WATER SHOWER\r\n");
+            }
+        }
+
+        if (gasBahaya) {
+            bunyikan_buzzer();
+        } else {
+            matikan_buzzer();
+        }
+
+        _delay_ms(1000); // Delay 1 detik
+    }
+}
