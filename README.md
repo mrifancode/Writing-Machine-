@@ -24,3 +24,29 @@ Proyek ini merupakan sistem deteksi dini kebakaran berbasis mikrokontroler ATmeg
 Sensor gas dan asap seperti MQ-2 digunakan untuk mendeteksi senyawa mudah terbakar seperti LPG, asap hasil pembakaran, serta uap alkohol. Ketika konsentrasi gas atau asap melebihi ambang batas tertentu, sistem akan mengaktifkan alarm buzzer yang dikendalikan oleh sinyal PWM, sehingga mampu menghasilkan bunyi dengan intensitas berbeda tergantung level bahaya.
 
 Selain alarm suara dan LED, sistem ini juga mengirimkan informasi status ke GUI yang menampilkan kondisi real-time, seperti konsentrasi gas, status sistem (aman atau bahaya), dan log waktu kejadian. Melalui GUI, pengguna juga dapat melakukan reset alarm, mengatur ambang batas, atau mengaktifkan simulasi kondisi bahaya untuk pengujian sistem.
+
+## Komponen Yang Digunakan
+1. **Hardware**<br>
+    a. Arduino ATmega 2560<br>
+    b. Shield PCB<br>
+    c. RTC<br>
+    d. Sensor Gas MQ2<br>
+    e. Sensor Asap MQ135<br>
+    f. Camera <br>
+    g. Buzzer <br>
+    h. Indikator Lampu (led) <br>
+
+2. **Software**<br>
+    a. KiCad<br>
+    b. Inventor<br>
+    c. Visual Studio Code (VSC)<br>
+    d. Figma <br>
+
+3. **Alat**<br>
+    a. Solder<br>
+    b. Timah solder<br>
+    c. Kabel jumper<br>
+    d. Breadboard<br>
+    e. Obeng<br>
+    f. PCB <br>
+    g. Filamen <br>
