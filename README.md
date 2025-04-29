@@ -1,4 +1,4 @@
-![FAISOL Preview](Assets/Logo Fisol.png)
+![FAISOL Preview](https://github.com/mrifancode/Smart-Gas-Smoke-Detection-System-for-Fire-Prevention/blob/main/Assets/Logo%20Fisol.png?raw=true)
 
 ## Didukung Oleh :
 >- Dosen Pengampu : Akhmad Hendriawan ST., MT. (NIP.197501272002121003)
