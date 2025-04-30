@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "author": "Akunpes Jing",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": 160.2, "left": 319.6, "attrs": {} },
+    { "type": "wokwi-arduino-mega", "id": "mega", "top": 173.4, "left": -90, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 273.6,
+      "left": 412.25,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 273.6,
+      "left": 450.65,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": 198, "left": 455, "attrs": { "color": "red" } },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 198,
+      "left": 416.6,
+      "attrs": { "color": "green" }
+    },
+    { "type": "wokwi-gas-sensor", "id": "gas1", "top": 41.1, "left": 410.2, "attrs": {} },
+    { "type": "wokwi-buzzer", "id": "bz1", "top": 12, "left": 40.2, "attrs": { "volume": "0.1" } },
+    { "type": "wokwi-gas-sensor", "id": "gas2", "top": 41.1, "left": 247, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -57.4, "left": 153.6, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay2", "top": -115, "left": 153.6, "attrs": {} }
+  ],
+  "connections": [
+    [ "mega:GND.3", "bb1:bn.1", "black", [ "v16.5", "h261.45" ] ],
+    [ "mega:5V", "bb1:bp.1", "red", [ "v26.1", "h271.1", "v-38.4" ] ],
+    [ "gas1:VCC", "bb1:bp.19", "red", [ "h0" ] ],
+    [ "gas1:GND", "bb1:bn.20", "black", [ "h0" ] ],
+    [ "bz1:2", "mega:5", "red", [ "v57.6", "h38" ] ],
+    [ "bz1:1", "mega:GND.1", "black", [ "v57.6", "h-38.4" ] ],
+    [ "mega:A5", "gas1:AOUT", "green", [ "v35.7", "h419.35", "v-336" ] ],
+    [ "led2:C", "bb1:bn.8", "black", [ "v0" ] ],
+    [ "led1:C", "bb1:bn.11", "black", [ "v0" ] ],
+    [ "r1:2", "mega:3", "green", [ "h0", "v18", "h9.6", "v-172.8", "h-297.6" ] ],
+    [ "r2:2", "mega:4", "green", [ "h0", "v18", "h9.6", "v-182.4", "h-364.8" ] ],
+    [ "gas2:AOUT", "mega:A6", "green", [ "h28.8", "v345.6", "h-240" ] ],
+    [ "gas2:GND", "gas1:GND", "black", [ "h0" ] ],
+    [ "gas1:VCC", "gas2:VCC", "red", [ "h0" ] ],
+    [ "relay2:GND", "relay1:GND", "black", [ "h-19.2", "v57.2" ] ],
+    [ "relay1:VCC", "relay2:VCC", "red", [ "h-28.8", "v-57.6", "h28.8" ] ],
+    [ "relay1:IN", "mega:53", "green", [ "h0", "v143.8", "h163.2", "v211.2" ] ],
+    [ "relay2:IN", "mega:51", "green", [ "h-9.6", "v191.8", "h182.4", "v211.2" ] ]
+  ],
+  "dependencies": {}
+}
