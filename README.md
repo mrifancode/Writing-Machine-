@@ -28,7 +28,8 @@ Sensor gas dan asap seperti MQ-2 digunakan untuk mendeteksi senyawa mudah terbak
 Selain alarm suara dan LED, sistem ini juga mengirimkan informasi status ke GUI yang menampilkan kondisi real-time, seperti konsentrasi gas, status sistem (aman atau bahaya), dan log waktu kejadian. Melalui GUI, pengguna juga dapat melakukan reset alarm, mengatur ambang batas, atau mengaktifkan simulasi kondisi bahaya untuk pengujian sistem.
 
 ## 🔥🔥 Komponen Yang Digunakan 🔥🔥
-1. **Hardware**<br>
+ **1. 🤖Hardware**<br>
+ 
     a. Arduino ATmega 2560<br>
     b. Shield PCB<br>
     c. RTC<br>
@@ -38,13 +39,15 @@ Selain alarm suara dan LED, sistem ini juga mengirimkan informasi status ke GUI 
     g. Buzzer <br>
     h. Indikator Lampu (led) <br>
 
-2. **Software**<br>
+**2. 💻Software**<br>
+
     a. KiCad<br>
     b. Inventor<br>
     c. Visual Studio Code (VSC)<br>
     d. Figma <br>
 
-3. **Alat**<br>
+**3. 🪛Alat**<br>
+
     a. Solder<br>
     b. Timah solder<br>
     c. Kabel jumper<br>
@@ -54,9 +57,15 @@ Selain alarm suara dan LED, sistem ini juga mengirimkan informasi status ke GUI 
     g. Filamen <br>
     
 ## 🚨Manfaat Project 🚨
-    1. Pencegahan dini kebakaran dengan deteksi GAS/ASAP secara cepat, sistem dapat mencegah     terjadinya kebakaran besar
-    2. Meningkatkan keselamatan penghuni rumah atau area yang dipantau
-    3. Memudahkan penggina dan petugas keamanan dalam mengambil tindakan segera
-    4. Memberikan dokumentasi visual yang membantu identifikasi sumber kebakaran dan sebagai bukti kejadian 
-    5. Mencegah kerusakan lebih luas sejak awal
+Berikut adalah manfaat-manfaat yang didapatkan dari project kami:
+
+1. **Pencegahan dini kebakaran** dengan mendeteksi gas/asap secara cepat, sistem dapat mencegah terjadinya kebakaran besar
+
+2. **Meningkatkan keselamatan** penghuni rumah atau area yang dipantau.
+
+3. **Mengurangi risiko** korban jiwa dan kerugian materi akibat kebakaran melalui sistem peringatan dini.
+
+4. **Notifikasi real-time** memudahkan pengguna dan petugas keamanan dalam mengambil tindakan segera.
+
+
     
