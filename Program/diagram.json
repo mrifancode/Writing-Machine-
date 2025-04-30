@@ -53,7 +53,8 @@
     [ "relay2:GND", "relay1:GND", "black", [ "h-19.2", "v57.2" ] ],
     [ "relay1:VCC", "relay2:VCC", "red", [ "h-28.8", "v-57.6", "h28.8" ] ],
     [ "relay1:IN", "mega:53", "green", [ "h0", "v143.8", "h163.2", "v211.2" ] ],
-    [ "relay2:IN", "mega:51", "green", [ "h-9.6", "v191.8", "h182.4", "v211.2" ] ]
+    [ "relay2:IN", "mega:51", "green", [ "h-9.6", "v191.8", "h182.4", "v211.2" ] ],
+    [ "relay1:GND", "mega:GND.1", "black", [ "h0" ] ]
   ],
   "dependencies": {}
 }
