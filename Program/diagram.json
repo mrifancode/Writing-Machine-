@@ -47,14 +47,23 @@
     [ "led1:C", "bb1:bn.11", "black", [ "v0" ] ],
     [ "r1:2", "mega:3", "green", [ "h0", "v18", "h9.6", "v-172.8", "h-297.6" ] ],
     [ "r2:2", "mega:4", "green", [ "h0", "v18", "h9.6", "v-182.4", "h-364.8" ] ],
-    [ "gas2:AOUT", "mega:A6", "green", [ "h28.8", "v345.6", "h-240" ] ],
     [ "gas2:GND", "gas1:GND", "black", [ "h0" ] ],
     [ "gas1:VCC", "gas2:VCC", "red", [ "h0" ] ],
     [ "relay2:GND", "relay1:GND", "black", [ "h-19.2", "v57.2" ] ],
     [ "relay1:VCC", "relay2:VCC", "red", [ "h-28.8", "v-57.6", "h28.8" ] ],
-    [ "relay1:IN", "mega:53", "green", [ "h0", "v143.8", "h163.2", "v211.2" ] ],
-    [ "relay2:IN", "mega:51", "green", [ "h-9.6", "v191.8", "h182.4", "v211.2" ] ],
-    [ "relay1:GND", "mega:GND.1", "black", [ "h0" ] ]
+    [ "relay1:GND", "mega:GND.1", "black", [ "h0" ] ],
+    [ "mega:A4", "gas2:AOUT", "green", [ "v54.9", "h246.45", "v-355.2" ] ],
+    [ "r1:1", "bb1:11t.e", "", [ "$bb" ] ],
+    [ "r1:2", "bb1:11b.i", "", [ "$bb" ] ],
+    [ "r2:1", "bb1:15t.e", "", [ "$bb" ] ],
+    [ "r2:2", "bb1:15b.i", "", [ "$bb" ] ],
+    [ "led1:A", "bb1:15t.d", "", [ "$bb" ] ],
+    [ "led1:C", "bb1:14t.d", "", [ "$bb" ] ],
+    [ "led2:A", "bb1:11t.d", "", [ "$bb" ] ],
+    [ "led2:C", "bb1:10t.d", "", [ "$bb" ] ],
+    [ "relay1:IN", "mega:6", "green", [ "h0" ] ],
+    [ "relay2:IN", "mega:7", "green", [ "h0" ] ],
+    [ "relay1:VCC", "mega:5V", "red", [ "h-163.2", "v422.4", "h76.8" ] ]
   ],
   "dependencies": {}
 }
