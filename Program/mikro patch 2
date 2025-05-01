@@ -19,6 +19,9 @@
 #define SENSOR_THRESHOLD 400
 #define SHOWER_THRESHOLD 1000
 
+#define RELAY1_PIN   PB7  // Pin untuk Relay 1 (sensor gas)
+#define RELAY2_PIN   PB6  // Pin untuk Relay 2 (sensor asap)
+
 #define SET_BIT(port, bit)     ((port) |= (1 << (bit)))
 #define CLR_BIT(port, bit)     ((port) &= ~(1 << (bit)))
 
@@ -85,6 +88,7 @@ void setup_io() {
     DDRG |= (1 << LED_BAHAYA); // LED merah
     DDRE |= (1 << LED_AMAN);   // LED hijau
     DDRE |= (1 << PE4);        // Shower output
+    DDRB |= (1 << RELAY1_PIN) | (1 << RELAY2_PIN); // Set Relay 1 and Relay 2 as output
     adc_init();
 }
 
@@ -134,17 +138,22 @@ int main(void) {
             SET_BIT(PORTG, LED_BAHAYA);
             CLR_BIT(PORTE, LED_AMAN);
 
+            // Aktifkan Relay 1
+            SET_BIT(PORTB, RELAY1_PIN);
+            UART_print("Relay 1 (Gas) Aktif\r\n-----------------------------------\r\n");
+            
+
             if (!lastGasState) {
-                UART_print("Gas Terdeteksi! Aktifkan FAN\r\n");
+                UART_print("Gas Terdeteksi! Aktifkan FAN\r\n-----------------------------------\r\n");
                 lastGasState = true;
             }
 
             if (sensorValue >= SHOWER_THRESHOLD && !showerAktif) {
                 aktifkan_shower();
-                UART_print("Gas Sangat Tinggi! Aktifkan WATER SHOWER!\r\n");
+                UART_print("Gas Sangat Tinggi! Aktifkan WATER SHOWER!\r\n-----------------------------------\r\n");
             } else if (sensorValue < SHOWER_THRESHOLD && showerAktif) {
                 matikan_shower();
-                UART_print("Gas Menurun! Matikan WATER SHOWER.\r\n");
+                UART_print("Gas Menurun! Matikan WATER SHOWER.\r\n-----------------------------------\r\n");
             }
 
         } else {
@@ -153,23 +162,38 @@ int main(void) {
             CLR_BIT(PORTG, LED_BAHAYA);
             SET_BIT(PORTE, LED_AMAN);
 
+            // Matikan Relay 1
+            CLR_BIT(PORTB, RELAY1_PIN);
+            UART_print("Relay 1 (Gas) Matikan\r\n-----------------------------------\r\n");
+
+
             if (lastGasState) {
-                UART_print("Aman. Matikan FAN\r\n");
+                UART_print("Aman. Matikan FAN\r\n-----------------------------------\r\n");
                 lastGasState = false;
             }
 
             if (showerAktif) {
                 matikan_shower();
-                UART_print("Aman. Matikan WATER SHOWER\r\n");
+                UART_print("Aman. Matikan WATER SHOWER\r\n-----------------------------------\r\n");
             }
         }
 
 // Logika untuk sensor asap
       if (sensorAsapValue > SENSOR_ASAP_THRESHOLD) {
+        // Aktifkan Relay 2
+        SET_BIT(PORTB, RELAY2_PIN);
+        UART_print("Relay 2 (Asap) Aktif\r\n-----------------------------------\r\n");
+
+
         SET_BIT(PORTG, LED_BAHAYA); // Nyalakan LED bahaya jika asap terdeteksi
-        UART_print("Asap Terdeteksi! Periksa Kamar!\r\n");
+        UART_print("Asap Terdeteksi! Periksa Kamar!\r\n-----------------------------------\r\n");
         // Bisa menambahkan tindakan lain, seperti menyalakan alarm atau mengaktifkan shower
       } else {
+        // Matikan Relay 2
+        CLR_BIT(PORTB, RELAY2_PIN);
+        UART_print("Relay 2 (Asap) Matikan\r\n-----------------------------------\r\n");
+
+        
         CLR_BIT(PORTG, LED_BAHAYA); // Matikan LED bahaya jika asap tidak terdeteksi
       }
         set_buzzer_frequency(sensorValue);
