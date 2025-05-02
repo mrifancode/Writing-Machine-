@@ -8,16 +8,17 @@
 #define VBAUDRATE (F_CPU/((unsigned long) BAUDRATE*16)-1)
 #define BAUDH VBAUDRATE / 256
 #define BAUDL VBAUDRATE % 256
-/////////////////////////////////////////////////////
-#define SENSOR_ASAP_THRESHOLD 400  // Ambang batas untuk sensor asap
+
+#define SENSOR_ASAP_THRESHOLD 600  // Ambang batas untuk sensor asap
+#define SENSOR_THRESHOLD 600
+#define SHOWER_THRESHOLD 1000
+
 #define SENSOR_ASAP_PIN    PC4  // Pin ADC untuk sensor asap (misalnya PC4)
-////////////////////////////////////////////////////
+
 #define LED_BAHAYA   PG5
 #define LED_AMAN     PE5
 #define BUZZER       PE3  // Buzzer di pin PE3 (toggle via ISR)
 
-#define SENSOR_THRESHOLD 400
-#define SHOWER_THRESHOLD 1000
 
 #define RELAY1_PIN   PB7  // Pin untuk Relay 1 (sensor gas)
 #define RELAY2_PIN   PB6  // Pin untuk Relay 2 (sensor asap)
