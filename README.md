@@ -67,5 +67,7 @@ Berikut adalah manfaat-manfaat yang didapatkan dari project kami:
 
 4. **Notifikasi real-time** memudahkan pengguna dan petugas keamanan dalam mengambil tindakan segera.
 
+## 🔌🔌 Wiring PCB 🔌🔌
+![FAISOL Preview](https://github.com/mrifancode/Smart-Gas-Smoke-Detection-System-for-Fire-Prevention/blob/main/Hardware/Wiring%20PCB.png?raw=true)
 
     
