@@ -70,4 +70,17 @@ Berikut adalah manfaat-manfaat yang didapatkan dari project kami:
 ## 🔌🔌 Wiring PCB 🔌🔌
 ![FAISOL Preview](https://github.com/mrifancode/Smart-Gas-Smoke-Detection-System-for-Fire-Prevention/blob/main/Hardware/Wiring%20PCB.png?raw=true)
 
+## 💸💸 Rancangan Anggaran Biaya 💸💸
+
+|      Nama Barang      |       Jumlah      |    Harga    |  
+| :-----------:|:----------------:| :------------:| 
+| Arduino ATmega2560    | 1  | Rp 180.000    | 
+| MQ-135    |    1        |  Rp 23.500 | 
+| MQ-2    |    1       |    Rp 14.300      | 
+| Relay dual Channel    | 1  | Rp 20.250 | 
+| PCB    | 1  | Rp 2.000     | 
+| Kabel USB    | 1  | Rp5.000     | 
+| Kabel Jumper    | 1pack  | Rp15.000     |   
+| Kabel USB    | 1  | Rp5.000     |
+
     
